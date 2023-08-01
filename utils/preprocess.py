@@ -98,13 +98,12 @@ def preprocess_pipeline(odds_data_address: str) -> T.Dict:
     iw_df = pd.concat([iw_df, avg_df[avg_cols]], axis=1)
     wh_df = pd.concat([wh_df, avg_df[avg_cols]], axis=1)
     vc_df = pd.concat([vc_df, avg_df[avg_cols]], axis=1)
-    avg_df = pd.concat([avg_df, avg_df[avg_cols]], axis=1)
-
 
     betting_odds_clean_data = {'Bet365': b365_df,
                                'Bet&Win': bw_df,
                                'Interwetten': iw_df,
                                'William_Hill': wh_df,
-                               'VC_Bet': vc_df,}
+                               'VC_Bet': vc_df,
+                               'AVG': avg_df}
     
     return betting_odds_clean_data
