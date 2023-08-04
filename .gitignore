@@ -1,3 +1,5 @@
 Data/
 Data_Cleaning.ipynb
 all_avail_games.csv
+visualizations/*.html
+*.rar

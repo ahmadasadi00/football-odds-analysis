@@ -59,15 +59,15 @@ def preprocess_pipeline(odds_data_address: str) -> T.Dict:
         T.Dict:  dictionary which keys are the bookmaker's names and contains each bookmakers odds and probabilities and margins
     """
     data = pd.read_csv(odds_data_address, index_col=0)
-    main_cols = ['Div', 'Date', 'HomeTeam' ,'AwayTeam', 'FTR']
+    main_cols = ['Unique_ID', 'Div', 'Date', 'HomeTeam' ,'AwayTeam', 'FTR']
     avg_cols = ['AvgH', 'AvgD', 'AvgA','AvgProbH','AvgProbA','AvgProbD', 'Avg_return_on_game']
     avg_df = data[main_cols]
 
-    cols_b365 = ['Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'B365H', 'B365D', 'B365A']
-    cols_bw = ['Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'BWH', 'BWD', 'BWA']
-    cols_iw = ['Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'IWH', 'IWD', 'IWA']
-    cols_wh = ['Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'WHH', 'WHD', 'WHA']
-    cols_vc = ['Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'VCH', 'VCD', 'VCA']
+    cols_b365 = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'B365H', 'B365D', 'B365A']
+    cols_bw = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'BWH', 'BWD', 'BWA']
+    cols_iw = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'IWH', 'IWD', 'IWA']
+    cols_wh = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'WHH', 'WHD', 'WHA']
+    cols_vc = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'VCH', 'VCD', 'VCA']
 
     b365_df = data[cols_b365]
     bw_df = data[cols_bw]
