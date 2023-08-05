@@ -107,3 +107,20 @@ def preprocess_pipeline(odds_data_address: str) -> T.Dict:
                                'AVG': avg_df}
     
     return betting_odds_clean_data
+
+
+def preprocess_odds_results(odds_data_address: str) -> T.Dict:
+    data = pd.read_csv(odds_data_address, index_col=0)
+    odds = data[['B365H', 'B365D', 'B365A', 'BWH', 'BWD', 'BWA', 'IWH',
+                                  'IWD', 'IWA', 'WHH', 'WHD', 'WHA', 'VCH', 'VCD', 'VCA',]]
+    
+    odds['Unique_ID'] = data['Unique_ID']
+    odds['Date'] = data['Date']
+    odds.set_index('Unique_ID', drop=True, inplace=True)
+    
+    results = data[['Unique_ID', 'Date', 'FTR']]
+    results.set_index('Unique_ID', drop=True, inplace=True)
+    
+    odds_results = {'Odds': odds,
+                    'Results': results}
+    return odds_results

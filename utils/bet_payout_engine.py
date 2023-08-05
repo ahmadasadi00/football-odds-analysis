@@ -2,7 +2,6 @@ import typing as T
 import pandas as pd
 import os
 os.chdir(r'D:\Projects\football-odds-analysis')
-from utils.preprocess import preprocess_pipeline
 
 Bet = T.Literal["H", "D", "A"]
 Bookmaker = T.Literal['Bet365', 'Bet&Win', 'Interwetten', 'William_Hill', 'VC_Bet']
@@ -14,13 +13,16 @@ companies = {'Bet365': 'B365',
              'VC_Bet': 'VC',
              'AVG': 'Avg'}
 
-def get_bet_results(game_id: str, 
-                    bet: Bet , 
-                    bookmaker: Bookmaker,
-                    amount: float) -> float:
+def get_bet_results(
+    bookmakers_data: pd.DataFrame,
+    game_id: str, 
+    bet: Bet , 
+    bookmaker: Bookmaker,
+    amount: float) -> float:
     """A function that calculates a bet payout based on full time results of the match
 
     Args:
+        bookmakers_data (DataFrame): the complete data of different bookmakers and games
         game_id (str): unique game id that assigned to each game
         bet (Bet): HomeTeam Win (H), Draw (D) or AwayTeam Win (A)
         bookmaker (Bookmaker): the bookmaker that the bet is placed
@@ -29,7 +31,6 @@ def get_bet_results(game_id: str,
     Returns:
         float: the payout of the bet
     """
-    bookmakers_data = preprocess_pipeline('all_avail_games.csv')
     bm_data = bookmakers_data[bookmaker]
     game_row = bm_data[bm_data['Unique_ID'] == game_id]
     co_code = companies[bookmaker]
