@@ -35,8 +35,8 @@ def get_bet_results(
     game_row = bm_data[bm_data['Unique_ID'] == game_id]
     co_code = companies[bookmaker]
     
-    if game_row.FTR == bet:
-        payout = game_row[f'{co_code}{bet}']*amount
+    if game_row['FTR'].values[0] == bet:
+        payout = float(game_row[f'{co_code}{bet}']*amount)
     else:
         payout = 0
     
