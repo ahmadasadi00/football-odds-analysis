@@ -1,6 +1,7 @@
 import pandas as pd
 import itertools
 import typing as T
+from input_variables import COMPANY_BETS
 
 
 def get_favorite_bets(bookmakers_data: pd.DataFrame, 
@@ -16,9 +17,8 @@ def get_favorite_bets(bookmakers_data: pd.DataFrame,
         {'game_id': `{company}{bet}`}
     """
     favorites = {}
-    company_bets = ['B365H', 'BWH', 'IWH', 'WHH', 'VCH', 'B365D', 'BWD', 'IWD', 'WHD', 'VCD', 'B365A', 'BWA', 'IWA', 'WHA', 'VCA']
     
-    for cb in company_bets:
+    for cb in COMPANY_BETS:
         cb_probs = 1/bookmakers_data[cb]
         selected_bets = cb_probs[cb_probs > cut_off]
         for bet in selected_bets.index:
@@ -40,9 +40,7 @@ def get_longshot_bets(bookmakers_data: pd.DataFrame,
         {'game_id': `{company}{bet}`}
     """
     longshots = {}
-    company_bets = ['B365H', 'BWH', 'IWH', 'WHH', 'VCH', 'B365D', 'BWD', 'IWD', 'WHD', 'VCD', 'B365A', 'BWA', 'IWA', 'WHA', 'VCA']
-    
-    for cb in company_bets:
+    for cb in COMPANY_BETS:
         cb_probs = 1/bookmakers_data[cb]
         selected_bets = cb_probs[cb_probs < cut_off]
         

@@ -2,16 +2,10 @@ import typing as T
 import pandas as pd
 import os
 os.chdir(r'D:\Projects\football-odds-analysis')
+from input_variables import COMPANIES
 
 Bet = T.Literal["H", "D", "A"]
 Bookmaker = T.Literal['Bet365', 'Bet&Win', 'Interwetten', 'William_Hill', 'VC_Bet']
-
-companies = {'Bet365': 'B365',
-             'Bet&Win': 'BW',
-             'Interwetten': 'IW',
-             'William_Hill': 'WH',
-             'VC_Bet': 'VC',
-             'AVG': 'Avg'}
 
 def get_bet_results(
     bookmakers_data: pd.DataFrame,
@@ -33,7 +27,7 @@ def get_bet_results(
     """
     bm_data = bookmakers_data[bookmaker]
     game_row = bm_data[bm_data['Unique_ID'] == game_id]
-    co_code = companies[bookmaker]
+    co_code = COMPANIES[bookmaker]
     
     if game_row['FTR'].values[0] == bet:
         payout = float(game_row[f'{co_code}{bet}']*amount)

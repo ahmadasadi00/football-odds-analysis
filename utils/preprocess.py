@@ -3,6 +3,7 @@ import warnings
 import pickle
 import typing as T
 warnings.filterwarnings('ignore')
+from input_variables import COMPANY_BETS
 
 # companies
 # Bet365
@@ -68,7 +69,9 @@ def preprocess_pipeline(odds_data_address: str) -> T.Dict:
     cols_iw = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'IWH', 'IWD', 'IWA']
     cols_wh = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'WHH', 'WHD', 'WHA']
     cols_vc = ['Unique_ID', 'Div','Date', 'HomeTeam' ,'AwayTeam', 'FTR', 'VCH', 'VCD', 'VCA']
-
+    
+    data = data[~(data[COMPANY_BETS] == 0).any(axis=1)]
+    
     b365_df = data[cols_b365]
     bw_df = data[cols_bw]
     iw_df = data[cols_iw]
@@ -110,10 +113,22 @@ def preprocess_pipeline(odds_data_address: str) -> T.Dict:
 
 
 def preprocess_odds_results(odds_data_address: str) -> T.Dict:
-    data = pd.read_csv(odds_data_address, index_col=0)
-    odds = data[['B365H', 'B365D', 'B365A', 'BWH', 'BWD', 'BWA', 'IWH',
-                                  'IWD', 'IWA', 'WHH', 'WHD', 'WHA', 'VCH', 'VCD', 'VCA',]]
+    """gets address of betting odds csv file address and returns two dataframes of odds and results
+
+    Args:
+        odds_data_address (str): odds file csv file
+
+    Returns:
+        T.Dict: {'Odds': Odds,
+                 'Results': Results,
+                 }
+    """
     
+    data = pd.read_csv(odds_data_address, index_col=0)
+    
+    data = data[~(data[COMPANY_BETS] == 0).any(axis=1)]
+    
+    odds = data[COMPANY_BETS]
     odds['Unique_ID'] = data['Unique_ID']
     odds['Date'] = data['Date']
     odds.set_index('Unique_ID', drop=True, inplace=True)

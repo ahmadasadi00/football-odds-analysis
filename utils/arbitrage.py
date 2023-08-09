@@ -1,6 +1,7 @@
 import pandas as pd
 import itertools
 import typing as T
+from input_variables import CATEGORIES
 
 def get_bet_weights(h: float, 
                     a: float, 
@@ -36,14 +37,9 @@ def get_arbitrage_bets(bookmakers_data: pd.DataFrame,
         {'game_id': [companies we place the bet for each outcome, 
                      weights we place the bet for each outcome]}
     """
-    categories = {
-    'H': ['B365H', 'BWH', 'IWH', 'WHH', 'VCH'],
-    'D': ['B365D', 'BWD', 'IWD', 'WHD', 'VCD'],
-    'A': ['B365A', 'BWA', 'IWA', 'WHA', 'VCA']
-    }
     valid_combinations = {}
 
-    for cat in itertools.product(categories['H'], categories['A'], categories['D']):
+    for cat in itertools.product(CATEGORIES['H'], CATEGORIES['A'], CATEGORIES['D']):
         category_combination = list(cat)
         selected_set = bookmakers_data[category_combination]
         selected_set['sum_of_probs_values'] = 0
