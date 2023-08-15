@@ -21,3 +21,24 @@ CO_CODES = {
             'WH': 'William_Hill',
             'VC': 'VC_Bet',
              }
+
+DIVISIONS = {
+    'E0': 'English Premier League',
+    'E1': 'Championship',
+    'E2': 'English League 1',
+    'E3': 'English League 2',
+    'EC': 'English Conference',
+    'D1': 'Bundesliga 1',
+    'D2': 'Bundesliga 2',
+    'I1': 'Serie A',
+    'I2': 'Serie B',
+    'SP1': 'La Liga Primera',
+    'SP2': 'La Liga Segunda',
+    'F1': 'Le Championnat',
+    'F2': 'France Division 2',
+    'N1': 'Netherlands',
+    'B1': 'Belgium',
+    'P1': 'Portugal',
+    'T1': 'Turkey',
+    'G1': 'Greece',
+}
